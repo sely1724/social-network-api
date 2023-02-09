@@ -1,6 +1,29 @@
 const { Schema, Types } = require("mongoose");
 
-const responseSchema = new Schema(
+// ^^^ do we need to include model up here???
+
+const reactionSchema = new Schema(
+  {
+    reactionId: {
+      type: Schema.Types.ObjectId,
+      default: () => new Types.ObjectId(),
+    },
+    reactionBody: { type: String, required: true, maxlength: 280 },
+    username: { type: String, required: true },
+    createdAt: {
+      type: Date,
+      default: Date.now, // TODO: !!!!!!!!!!!!  // Use a getter method to format the timestamp on query
+    },
+  },
+  {
+    toJSON: {
+      getters: true,
+    },
+    id: false,
+  }
+);
+
+const thoughtSchema = new Schema(
   {
     thoughtText: {
       type: String,
@@ -14,11 +37,7 @@ const responseSchema = new Schema(
       // getter method to format the timestamp on query.
     },
     username: { type: String, required: true },
-    reactions: [
-      {
-        // array of nested documents created within the reactionSchema?? how to create
-      },
-    ],
+    reactions: [reactionSchema],
   },
   {
     toJSON: {
@@ -27,9 +46,8 @@ const responseSchema = new Schema(
     id: false,
   }
 );
-
-module.exports = responseSchema;
-
 // Schema Settings:
 
 // Create a virtual called reactionCount that retrieves the length of the thought's reactions array field on query.
+
+module.exports = thoughtSchema;
