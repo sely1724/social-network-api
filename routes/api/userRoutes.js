@@ -1,19 +1,19 @@
-// **`/api/users`**
+const router = require("express").Router();
+const {
+  allUsers,
+  singleUser,
+  createUser,
+  updateUser,
+  deleteUser,
+  addFriend,
+  removeFriend,
+} = require("../../controllers/userController");
 
-// - `GET` all users
+// methods that user api/users
+router.route("/").get(allUsers).post(createUser);
+// methods that user api/users/userID
+router.route("/userUd").get(singleUser).put(updateUser).delete(deleteUser);
+// methods that user api/users/userID/friends/friendId
+router.route("/userId/friends/friendId").post(addFriend).delete(removeFriend);
 
-// - `GET` a single user by its `_id` and populated thought and friend data
-
-// - `POST` a new user:
-
-// ```json
-// // example data
-// {
-//   "username": "lernantino",
-//   "email": "lernantino@gmail.com"
-// }
-// ```
-
-// - `PUT` to update a user by its `_id`
-
-// - `DELETE` to remove user by its `_id`
+module.exports = router;
