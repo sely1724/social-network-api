@@ -4,8 +4,6 @@
 
 ## Your Task
 
-MongoDB is a popular choice for many social networks due to its speed with large amounts of data and flexibility with unstructured data. Over the last part of this course, you’ll use several of the technologies that social networking platforms use in their full-stack applications. Because the foundation of these applications is data, it’s important that you understand how to build and structure the API first.
-
 Your Challenge is to build an API for a social network web application where users can share their thoughts, react to friends’ thoughts, and create a friend list. You’ll use Express.js for routing, a MongoDB database, and the Mongoose ODM. In addition to using the [Express.js](https://www.npmjs.com/package/express) and [Mongoose](https://www.npmjs.com/package/mongoose) packages, you may also optionally use a JavaScript date library of your choice or the native JavaScript `Date` object to format timestamps.
 
 No seed data is provided, so you’ll need to create your own data using Insomnia after you’ve created your API.
@@ -63,92 +61,6 @@ In addition to this, your walkthrough video should show the POST and DELETE rout
 Be sure to have MongoDB installed on your machine. Follow the [MongoDB installation guide on The Full-Stack Blog](https://coding-boot-camp.github.io/full-stack/mongodb/how-to-install-mongodb) to install MongoDB locally.
 
 Use the following guidelines to set up your models and API routes:
-
-### Models
-
-**User**:
-
-- `username`
-
-  - String
-  - Unique
-  - Required
-  - Trimmed
-
-- `email`
-
-  - String
-  - Required
-  - Unique
-  - Must match a valid email address (look into Mongoose's matching validation)
-
-- `thoughts`
-
-  - Array of `_id` values referencing the `Thought` model
-
-- `friends`
-  - Array of `_id` values referencing the `User` model (self-reference)
-
-**Schema Settings**:
-
-Create a virtual called `friendCount` that retrieves the length of the user's `friends` array field on query.
-
----
-
-**Thought**:
-
-- `thoughtText`
-
-  - String
-  - Required
-  - Must be between 1 and 280 characters
-
-- `createdAt`
-
-  - Date
-  - Set default value to the current timestamp
-  - Use a getter method to format the timestamp on query
-
-- `username` (The user that created this thought)
-
-  - String
-  - Required
-
-- `reactions` (These are like replies)
-  - Array of nested documents created with the `reactionSchema`
-
-**Schema Settings**:
-
-Create a virtual called `reactionCount` that retrieves the length of the thought's `reactions` array field on query.
-
----
-
-**Reaction** (SCHEMA ONLY)
-
-- `reactionId`
-
-  - Use Mongoose's ObjectId data type
-  - Default value is set to a new ObjectId
-
-- `reactionBody`
-
-  - String
-  - Required
-  - 280 character maximum
-
-- `username`
-
-  - String
-  - Required
-
-- `createdAt`
-  - Date
-  - Set default value to the current timestamp
-  - Use a getter method to format the timestamp on query
-
-**Schema Settings**:
-
-This will not be a model, but rather will be used as the `reaction` field's subdocument schema in the `Thought` model.
 
 ### API Routes
 
