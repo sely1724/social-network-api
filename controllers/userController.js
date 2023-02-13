@@ -52,4 +52,32 @@ module.exports = {
   },
 
   // TODO: Figure out how to: Add friend to users friend list
+
+  // Add a Friend.  Connect to User.
+
+  addFriend(req, res) {
+    User.findOneAndUpdate(
+      { _id: req.params.userId },
+      { $addToSet: { reactions: req.body } },
+      { runValidators: true, new: true }
+    )
+      .then((user) =>
+        !user
+          ? res.status(404).json({ message: "No user with this id" })
+          : res.json(user)
+      )
+      .catch((err) => res.status(500).json(err));
+  },
+
+  removeFriend(req, res) {
+    User.findOneAndDelete(
+      { _id: req.params.userId },
+      { $pull: { friends: { friendsId: req.params.friendsId } } },
+      { runValidators: true, new: true }
+    ).then((user) =>
+      !user
+        ? res.status(404).json({ message: "No user found with the id" })
+        : res.json(user)
+    );
+  },
 };
