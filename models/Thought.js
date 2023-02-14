@@ -1,4 +1,5 @@
 const { Schema, Types } = require("mongoose");
+const moment = require("moment");
 
 // ^^^ do we need to include model up here???
 
@@ -13,6 +14,8 @@ const reactionSchema = new Schema(
     createdAt: {
       type: Date,
       default: Date.now, // TODO: !!!!!!!!!!!!  // Use a getter method to format the timestamp on query
+      get: (createdAtTime) =>
+        moment(createdAtTime).format("MMMM Do YYYY, [at] hh:mm a"),
     },
   },
   {
@@ -33,6 +36,8 @@ const thoughtSchema = new Schema(
     date: {
       type: Date,
       default: Date.now,
+      get: (createdAtTime) =>
+        moment(createdAtTime).format("MMMM Do YYYY, [at] hh:mm a"),
 
       // getter method to format the timestamp on query.
     },
@@ -49,5 +54,14 @@ const thoughtSchema = new Schema(
 // Schema Settings:
 
 // Create a virtual called reactionCount that retrieves the length of the thought's reactions array field on query.
+thoughtSchema
+  .virtual("reactionCount")
+  // Getter
+  .get(function () {
+    return `${this.reactions.length}`;
+  });
 
-module.exports = thoughtSchema;
+// Initialize our Thought model
+const Thought = model("thought", thoughtSchema);
+
+module.exports = Thought;
