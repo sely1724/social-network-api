@@ -1,15 +1,56 @@
-const userArray = ["sely", "equilibrium", "isaacnewton", "testtest"];
+const userArray = [
+  "sely",
+  "equilibrium",
+  "isaacnewton",
+  "testtest",
+  "test2",
+  "test3",
+  "test4",
+  "test5",
+  "test6",
+  "test7",
+];
 
 const emailArray = [
   "sely@gmail.com",
   "equilibrium@gmail.com",
   "isaacnewton@gmail.com",
   "testtest@gmail.com",
+  "lydia@gmail.com",
+  "kevin@gmail.com",
+  "amy@gmail.com",
+  "sylvia@gmail.com",
+  "norman@gmail.com",
+  "regex@gmail.com",
+  "natasha@gmail.com",
+  "lyonne@gmail.com",
 ];
 
-const thoughtArray = ["testing", "hello", "my thought 1", "my thought 2"];
+const thoughtArray = [
+  "testing",
+  "hello",
+  "my thought 1",
+  "my thought 2",
+  "one two",
+  "buckle",
+  "my shoe",
+  "aloha",
+  "me too",
+  "same",
+  "noice",
+  "my thought 7",
+];
 
-const reactionArray = ["cool", "heck yeah", "nice", "love"];
+const reactionArray = [
+  "cool",
+  "heck yeah",
+  "nice",
+  "love",
+  "way to go",
+  "lovely",
+  "wow",
+  "great",
+];
 
 // Get a random item given an array
 const getRandomItem = (arr) => arr[Math.floor(Math.random() * arr.length)];
@@ -27,7 +68,6 @@ const getRandomThoughts = (int) => {
     results.push({
       thoughtText: getRandomItem(thoughtArray),
       reactions: getRandomItem(reactionArray),
-      // username: getRandomArrItem(usernameArray),
     });
   }
   return results;

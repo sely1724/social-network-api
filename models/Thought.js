@@ -31,9 +31,9 @@ const thoughtSchema = new Schema(
     thoughtText: {
       type: String,
       required: true,
-      maxlength: 280, // TODO: !!!!!!    add created at
+      maxlength: 280,
     },
-    date: {
+    createdAt: {
       type: Date,
       default: Date.now,
       get: (createdAtTime) =>
@@ -62,6 +62,6 @@ thoughtSchema
   });
 
 // Initialize our Thought model
-const Thought = model("thought", thoughtSchema);
+const Thought = model("Thought", thoughtSchema);
 
 module.exports = Thought;

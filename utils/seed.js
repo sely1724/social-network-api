@@ -15,20 +15,20 @@ connection.once("open", async () => {
 
   // Create empty array to hold the students
   const users = [];
-  const thoughts = getRandomThoughts(13);
+  const thoughts = getRandomThoughts(2);
 
   // Loop 20 times -- add students to the students array
-  for (let i = 0; i < 5; i++) {
-    // Get some random assignment objects using a helper function that we imported from ./data
-    const thoughts = getRandomThoughts(13);
-    const user = getRandomUser();
+  for (let i = 0; i < 20; i++) {
+    const username = getRandomUser();
     const email = getRandomEmail();
+    const thoughts = getRandomThoughts(2);
 
     users.push({
-      user,
+      username,
       email,
       thoughts,
     });
+    console.log(users);
   }
 
   // Add students to the collection and await the results

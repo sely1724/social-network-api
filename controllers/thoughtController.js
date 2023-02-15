@@ -21,7 +21,7 @@ module.exports = {
   // not quite sure where singular thought comes from?
   getSingleThought(req, res) {
     Thought.findOne({ _id: req.params.thoughtId })
-      .select("-__v") // what does this do?
+      //.select("-__v") // what does this do?
       .then((thought) =>
         !thought
           ? res.status(404).json({ message: "No thought with that ID" })

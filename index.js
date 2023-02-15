@@ -7,13 +7,8 @@ const routes = require("./routes");
 const cwd = process.cwd();
 
 // assign port
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3002;
 const app = express();
-
-// // Note: not necessary for the Express server to function. This just helps indicate what activity's server is running in the terminal.
-// const activity = cwd.includes("social-network-api")
-//   ? cwd.split("/social-network-api/")[1]
-//   : cwd;
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -24,4 +19,3 @@ db.once("open", () => {
     console.log(`API server for social running on port ${PORT}!`);
   });
 });
-// const cwd = process.cwd();
