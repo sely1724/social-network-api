@@ -1,8 +1,7 @@
 const { Schema, Types, model } = require("mongoose");
 const moment = require("moment");
 
-// ^^^ do we need to include model up here???
-
+// create our reaction schema.  We do this before creating thoughtSchema because we need the reactionSchema already built
 const reactionSchema = new Schema(
   {
     reactionId: {
@@ -13,7 +12,7 @@ const reactionSchema = new Schema(
     username: { type: String, required: true },
     createdAt: {
       type: Date,
-      default: Date.now, // TODO: !!!!!!!!!!!!  // Use a getter method to format the timestamp on query
+      default: Date.now,
       get: (createdAtTime) =>
         moment(createdAtTime).format("MMMM Do YYYY, [at] hh:mm a"),
     },
@@ -38,8 +37,6 @@ const thoughtSchema = new Schema(
       default: Date.now,
       get: (createdAtTime) =>
         moment(createdAtTime).format("MMMM Do YYYY, [at] hh:mm a"),
-
-      // getter method to format the timestamp on query.
     },
     username: { type: String, required: true },
     reactions: [reactionSchema],
@@ -53,7 +50,7 @@ const thoughtSchema = new Schema(
 );
 // Schema Settings:
 
-// Create a virtual called reactionCount that retrieves the length of the thought's reactions array field on query.
+// reactionCount is a Virtual that retrieves the length of the thought's reactions array field on query.
 thoughtSchema
   .virtual("reactionCount")
   // Getter

@@ -12,16 +12,13 @@ module.exports = {
   // Get all thoughts
   getThought(req, res) {
     Thought.find()
-      // assume we're using routes/api/index.js thoughts plural
       .then((thoughts) => res.json(thoughts))
       .catch((err) => res.status(500).json(err));
   },
 
   // Get single thought
-  // not quite sure where singular thought comes from?
   getSingleThought(req, res) {
     Thought.findOne({ _id: req.params.thoughtId })
-      //.select("-__v") // what does this do?
       .then((thought) =>
         !thought
           ? res.status(404).json({ message: "No thought with that ID" })
@@ -30,7 +27,7 @@ module.exports = {
       .catch((err) => res.status(500).json(err));
   },
 
-  // Create a thought. Accepts a request body with the entire Thought object.
+  // Create a thought.
   // Because thoughts are associated with Users, we then update the User who created the app and add the ID of the thought to the thoughts array
   createThought(req, res) {
     Thought.create(req.body)

@@ -51,10 +51,7 @@ module.exports = {
       .catch((err) => res.status(500).json(err));
   },
 
-  // TODO: Figure out how to: Add friend to users friend list
-
-  // Add a Friend.  Connect to User.
-
+  // Add a Friend.  Link to a specific User with findOneAndUpdate
   addFriend(req, res) {
     User.findOneAndUpdate(
       { _id: req.params.userId },
@@ -69,6 +66,7 @@ module.exports = {
       .catch((err) => res.status(500).json(err));
   },
 
+  // Remove Friend - or rather link between two users.
   removeFriend(req, res) {
     User.findOneAndUpdate(
       { _id: req.params.userId },
